@@ -9,8 +9,10 @@ const App = () => {
 
   return (
     <>
-      <FacialExpression setSongs={setSongs} />
-      <MoodSongs Songs={Songs} />
+      <div className='main'>
+        <FacialExpression setSongs={setSongs} />
+        <MoodSongs Songs={Songs} />
+      </div>
     </>
   )
 }

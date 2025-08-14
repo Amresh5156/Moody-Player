@@ -1,0 +1,12 @@
+.main{
+    height: screen;
+    width: full;
+    padding: 5;
+    background-color: #a1c0cc;
+}
+
+.picture-frame{
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 10px;
+}
