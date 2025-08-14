@@ -3,7 +3,7 @@ import React from 'react'
 const SongsCard = ({ title, artist, audio, index, isPlaying, onPlayPause }) => {
     
   return (
-    <div className='song' key={index}>
+    <div className={`song ${isPlaying === index ? 'playing' : ''}`} key={index}>
         <div className='title'>
             <h3>{title}</h3>
             <p>{artist}</p>
