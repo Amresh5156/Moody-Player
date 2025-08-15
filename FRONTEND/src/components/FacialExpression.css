@@ -1,70 +1,30 @@
 .mood-player {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 24px;
-    padding: 40px;
-    margin: 20px;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.mood-player::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-    z-index: -1;
-}
-
-.mood-player:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
-}
-
-/* Header section */
-.mood-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.mood-header h2 {
-    color: #ffffff;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.mood-header p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.1rem;
-    font-weight: 400;
+    gap: 20px;
+    box-shadow: none;
+    border: none;
 }
 
 /* Video container */
 .video-container {
     position: relative;
-    border-radius: 20px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 8px;
+    background: #2d3748;
+    padding: 6px;
+    border: 2px solid #718096;
 }
 
 .video-container video {
-    width: 400px;
-    height: 300px;
-    border-radius: 16px;
+    width: 320px;
+    height: 240px;
+    border-radius: 8px;
     object-fit: cover;
     display: block;
     background: #000;
@@ -73,191 +33,77 @@
 /* Canvas overlay */
 .video-container canvas {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    border-radius: 16px;
+    top: 6px;
+    left: 6px;
+    border-radius: 8px;
     pointer-events: none;
-}
-
-/* Status indicator */
-.status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-.status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #10b981;
-    animation: pulse 2s infinite;
-}
-
-.status-dot.offline {
-    background: #ef4444;
-}
-
-.status-dot.processing {
-    background: #f59e0b;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-.status-text {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    font-weight: 500;
 }
 
 /* Button styling */
 .mood-button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #667eea;
     border: none;
-    border-radius: 50px;
-    padding: 16px 32px;
+    border-radius: 8px;
+    padding: 12px 24px;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-    position: relative;
-    overflow: hidden;
-    min-width: 180px;
-}
-
-.mood-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.mood-button:hover::before {
-    left: 100%;
+    transition: background-color 0.2s ease;
+    min-width: 140px;
 }
 
 .mood-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-}
-
-.mood-button:active {
-    transform: translateY(0);
+    background: #5a67d8;
 }
 
 .mood-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    transform: none;
+    background: #718096;
 }
 
 /* Loading state */
 .mood-button.loading {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-}
-
-.mood-button.loading::after {
-    content: '';
-    width: 20px;
-    height: 20px;
-    border: 2px solid transparent;
-    border-top: 2px solid white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-left: 10px;
-    display: inline-block;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    background: #ed8936;
 }
 
 /* Mood result display */
 .mood-result {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 20px;
+    background: #2d3748;
+    border-radius: 8px;
+    padding: 16px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    animation: slideIn 0.5s ease;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    border: 1px solid #718096;
 }
 
 .mood-result h3 {
     color: #ffffff;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin: 0;
     font-weight: 600;
 }
 
-.mood-result p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-    margin: 0;
+/* Error Display */
+.mood-result.error {
+    border-color: #f56565;
+    background: #2d3748;
+}
+
+.mood-result.error h3 {
+    color: #f56565;
+}
+
+.mood-result.error p {
+    color: #cbd5e0;
+    font-size: 0.9rem;
+    margin: 8px 0 0 0;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
     .mood-player {
-        padding: 30px 20px;
-        margin: 15px;
-        border-radius: 20px;
-    }
-    
-    .mood-header h2 {
-        font-size: 1.8rem;
-    }
-    
-    .mood-header p {
-        font-size: 1rem;
-    }
-    
-    .video-container video {
-        width: 320px;
-        height: 240px;
-    }
-    
-    .mood-button {
-        padding: 14px 28px;
-        font-size: 1rem;
-        min-width: 160px;
-    }
-}
-
-@media (max-width: 480px) {
-    .mood-player {
-        padding: 25px 15px;
-        margin: 10px;
-    }
-    
-    .mood-header h2 {
-        font-size: 1.5rem;
+        gap: 15px;
     }
     
     .video-container video {
@@ -266,8 +112,25 @@
     }
     
     .mood-button {
-        padding: 12px 24px;
+        padding: 10px 20px;
         font-size: 0.9rem;
-        min-width: 140px;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mood-player {
+        gap: 12px;
+    }
+    
+    .video-container video {
+        width: 240px;
+        height: 180px;
+    }
+    
+    .mood-button {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        min-width: 100px;
     }
 }

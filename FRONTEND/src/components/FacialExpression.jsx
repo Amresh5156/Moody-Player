@@ -114,11 +114,6 @@ export default function FacialExpression({setSongs}) {
 
   return (
     <div className='mood-player'>
-      {/* Header */}
-      <div className='mood-header'>
-        <h2>🎭 Mood Detection</h2>
-        <p>Position your face in the camera and click detect to find your perfect mood-based playlist</p>
-      </div>
 
       {/* Status Indicator */}
       <div className='status-indicator'>
@@ -149,6 +144,17 @@ export default function FacialExpression({setSongs}) {
         <div className='mood-result' style={{ borderColor: 'rgba(239, 68, 68, 0.5)' }}>
           <h3>⚠️ Error</h3>
           <p>{error}</p>
+          {error.includes('Backend server') && (
+            <div style={{ marginTop: '15px', padding: '10px', background: '#2d3748', borderRadius: '6px', fontSize: '0.9rem' }}>
+              <p style={{ margin: '0 0 10px 0', color: '#cbd5e0' }}><strong>To fix this:</strong></p>
+              <ol style={{ margin: '0', paddingLeft: '20px', color: '#cbd5e0' }}>
+                <li>Open a new terminal</li>
+                <li>Navigate to the BACKEND folder</li>
+                <li>Run: <code style={{ background: '#4a5568', padding: '2px 6px', borderRadius: '4px' }}>npm start</code></li>
+                <li>Make sure MongoDB is running</li>
+              </ol>
+            </div>
+          )}
         </div>
       )}
 

@@ -1,20 +1,18 @@
 .mood-songs {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 20px;
+    background: #4a5568;
+    border-radius: 12px;
     padding: 30px;
-    margin: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #718096;
 }
 
 .mood-songs h2 {
-    color: #2d3748;
-    font-size: 2.2rem;
-    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 600;
     text-align: center;
-    margin-bottom: 30px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
     position: relative;
     padding-bottom: 15px;
 }
@@ -25,9 +23,9 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    width: 60px;
+    height: 3px;
+    background: #667eea;
     border-radius: 2px;
 }
 
@@ -42,18 +40,18 @@
 /* Empty state styling */
 .mood-songs .empty-state {
     text-align: center;
-    padding: 60px 20px;
-    color: #718096;
+    padding: 40px 20px;
+    color: #cbd5e0;
 }
 
 .mood-songs .empty-state h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: 15px;
-    color: #4a5568;
+    color: #e2e8f0;
 }
 
 .mood-songs .empty-state p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
 }
 
@@ -64,47 +62,39 @@
 }
 
 .mood-songs .loading .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #e2e8f0;
-    border-top: 4px solid #667eea;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #718096;
+    border-top: 3px solid #667eea;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
     margin: 0 auto 20px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
     .mood-songs {
-        margin: 15px;
-        padding: 20px;
-        border-radius: 16px;
+        padding: 25px 20px;
+        margin: 0;
     }
     
     .mood-songs h2 {
-        font-size: 1.8rem;
-        margin-bottom: 25px;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
     }
     
     .mood-songs h2::after {
-        width: 60px;
-        height: 3px;
+        width: 50px;
+        height: 2px;
     }
 }
 
 @media (max-width: 480px) {
     .mood-songs {
-        margin: 10px;
-        padding: 15px;
+        padding: 20px 15px;
     }
     
     .mood-songs h2 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
     }
 }

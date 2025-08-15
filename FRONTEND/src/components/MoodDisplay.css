@@ -1,0 +1,150 @@
+.mood-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Status indicator */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #2d3748;
+    border-radius: 20px;
+    border: 1px solid #718096;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #48bb78;
+}
+
+.status-dot.offline {
+    background: #f56565;
+}
+
+.status-dot.processing {
+    background: #ed8936;
+}
+
+.status-text {
+    color: #e2e8f0;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Mood result display */
+.mood-result {
+    background: #2d3748;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #718096;
+    min-width: 200px;
+}
+
+.mood-result h3 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Error Display */
+.mood-result.error {
+    border-color: #f56565;
+    background: #2d3748;
+}
+
+.mood-result.error h3 {
+    color: #f56565;
+}
+
+.mood-result.error p {
+    color: #cbd5e0;
+    font-size: 0.9rem;
+    margin: 8px 0 0 0;
+}
+
+/* Instructions */
+.instructions {
+    background: #2d3748;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #718096;
+    min-width: 200px;
+}
+
+.instructions h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    text-align: center;
+}
+
+.instructions ol {
+    color: #cbd5e0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+}
+
+.instructions li:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .mood-display {
+        gap: 20px;
+    }
+    
+    .mood-result,
+    .instructions {
+        min-width: 180px;
+        padding: 16px;
+    }
+    
+    .mood-result h3 {
+        font-size: 1.2rem;
+    }
+    
+    .instructions h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mood-display {
+        gap: 15px;
+    }
+    
+    .mood-result,
+    .instructions {
+        min-width: 160px;
+        padding: 14px;
+    }
+    
+    .mood-result h3 {
+        font-size: 1.1rem;
+    }
+    
+    .instructions h3 {
+        font-size: 1rem;
+    }
+    
+    .instructions ol {
+        font-size: 0.85rem;
+    }
+}

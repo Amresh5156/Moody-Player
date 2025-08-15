@@ -11,7 +11,12 @@ const SongsCard = ({ title, artist, audio, index, isPlaying, onPlayPause }) => {
 
         <div className='play-pause-button'>
             <button onClick={() => onPlayPause(index)}>
-                {isPlaying === index ? '⏸️' : '▶️'}
+                <img
+                    src={isPlaying === index
+                        ? "https://img.icons8.com/ios-glyphs/24/pause--v1.png"
+                        : "https://img.icons8.com/material-sharp/28/play--v1.png"}
+                    alt={isPlaying === index ? "Pause" : "Play"}
+                />
             </button>
             {isPlaying === index && (
                 <audio 
