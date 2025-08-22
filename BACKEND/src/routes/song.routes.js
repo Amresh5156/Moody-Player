@@ -7,36 +7,65 @@ const songModel = require("../models/song.models")
 const upload = multer({storage:multer.memoryStorage()});
 
 router.post('/songs',upload.single("audio"), async (req, res)=>{
-    console.log(req.body);
-    console.log(req.file);
-    const fileData = await uploadFile(req.file)
-    
-    const song = await songModel.create({
-        title:req.body.title,
-        artist:req.body.artist,
-        audio:fileData.url,
-        mood:req.body.mood
-    })
+    try {
+        console.log(req.body);
+        console.log(req.file);
+        
+        // Validate required fields
+        if (!req.body.title || !req.body.artist || !req.body.mood || !req.file) {
+            return res.status(400).json({
+                error: 'Missing required fields',
+                required: ['title', 'artist', 'mood', 'audio file']
+            });
+        }
+        
+        const fileData = await uploadFile(req.file)
+        
+        const song = await songModel.create({
+            title:req.body.title,
+            artist:req.body.artist,
+            audio:fileData.url,
+            mood:req.body.mood
+        })
 
-    res.status(201).json({
-        message: 'Song created successfully',
-        song: song
-    });
-    
+        res.status(201).json({
+            message: 'Song created successfully',
+            song: song
+        });
+    } catch (error) {
+        console.error('Error creating song:', error);
+        res.status(500).json({
+            error: 'Failed to create song',
+            message: error.message
+        });
+    }
 })
 
 router.get('/songs',async (req, res)=>{
-    const {mood} = req.query
+    try {
+        const {mood} = req.query
+        
+        if (!mood) {
+            return res.status(400).json({
+                error: 'Missing required parameter: mood'
+            });
+        }
 
-    const songs = await songModel.find({
-        mood: mood
-    })
+        const songs = await songModel.find({
+            mood: mood
+        })
 
-    res.status(200).json({
-        message:"Songs Fetch Successfully",
-        songs
-    }) 
-
+        res.status(200).json({
+            message:"Songs Fetch Successfully",
+            songs
+        });
+    } catch (error) {
+        console.error('Error fetching songs:', error);
+        res.status(500).json({
+            error: 'Failed to fetch songs',
+            message: error.message
+        });
+    }
 })
 
 
