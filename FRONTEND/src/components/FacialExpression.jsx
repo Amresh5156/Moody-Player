@@ -8,6 +8,7 @@ export default function FacialExpression({setSongs}) {
   const canvasRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [cameraEnabled, setCameraEnabled] = useState(false);
   const [moodResult, setMoodResult] = useState(null);
   const [error, setError] = useState(null);
 
@@ -29,15 +30,18 @@ export default function FacialExpression({setSongs}) {
         videoRef.current.srcObject = stream;
         videoRef.current.onloadedmetadata = () => {
           setIsVideoReady(true);
+          setCameraEnabled(true);
         };
       })
       .catch((err) => {
         setError('Camera access denied. Please allow camera permissions.');
         console.error("Error accessing webcam: ", err);
+        setCameraEnabled(false);
       });
   };
 
   async function detectMood() {
+    if (!cameraEnabled) return;
     if (!isVideoReady) return;
     
     setIsLoading(true);
@@ -60,7 +64,7 @@ export default function FacialExpression({setSongs}) {
       for(const expression of Object.keys(detections[0].expressions)){
         if(detections[0].expressions[expression] > mostProbableExpression){
           mostProbableExpression = detections[0].expressions[expression];
-          _expression = expression;
+          _expression = expression; 
         }
       }
 
@@ -100,6 +104,7 @@ export default function FacialExpression({setSongs}) {
 
   const getStatusText = () => {
     if (error) return 'Error';
+    if (!cameraEnabled) return 'Enable Camera'
     if (isLoading) return 'Processing...';
     if (moodResult) return 'Mood Detected!';
     if (isVideoReady) return 'Ready';
@@ -108,64 +113,86 @@ export default function FacialExpression({setSongs}) {
 
   const getStatusClass = () => {
     if (error) return 'offline';
+    if (!cameraEnabled) return 'Camera'
     if (isLoading) return 'processing';
     return '';
   };
 
+  const toggleCamera = () => {
+    setCameraEnabled(!cameraEnabled);
+    if (cameraEnabled) {
+      videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+    } else {
+      startVideo();
+    }
+  };
+  
   return (
-    <div className='mood-player'>
-
-      {/* Status Indicator */}
-      <div className='status-indicator'>
-        <div className={`status-dot ${getStatusClass()}`}></div>
-        <span className='status-text'>{getStatusText()}</span>
+    <div className='mood-container'>
+      <div className='mood-player'>
+        {/* Video Container */}
+        <div className='video-container'>
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+          />
+          <canvas ref={canvasRef} />
+        </div>
       </div>
 
-      {/* Video Container */}
-      <div className='video-container'>
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          playsInline
-        />
-        <canvas ref={canvasRef} />
+
+      <div className='mood-display'>
+        {/* Status Indicator */}
+        <div className='status-indicator'>
+          <div className={`status-dot ${getStatusClass()}`}></div>
+          <span className={`status-text` }>{`${getStatusText()}`}</span>
+        </div>
+
+        {/* Mood Result Display */}
+        {moodResult && (
+          <div className='mood-result'>
+            <h3>🎵 {moodResult.expression}</h3>
+          </div>
+        )}
+
+        {/* Error Display */}
+        {error && (
+          <div className='mood-result error'>
+            <h3>⚠️ Error</h3>
+            <p>{error}</p>
+          </div>
+        )}
+
+        {/* Instructions */}
+        {!moodResult && !error && (
+          <div className='instructions'>
+            <h3>📋 Instructions</h3>
+            <ol>
+              <li>Position your face in the camera view</li>
+              <li>Make sure your face is clearly visible</li>
+              <li>Click the "Detect Mood" button</li>
+              <li>Wait for the AI to analyze your expression</li>
+            </ol>
+          </div>
+        )}
+       <div className='button-container'>
+        <button className='camera-btn' onClick={toggleCamera}>
+            {cameraEnabled ? 'Disable Camera' : 'Enable Camera'}
+          </button>
+
+          {/* Action Button */}
+          <button 
+            className={`mood-button ${isLoading ? 'loading' : ''}`}
+            onClick={detectMood}
+            disabled={!isVideoReady || isLoading}
+          >
+            {isLoading ? 'Detecting...' : 'Detect Mood'}
+          </button>
+       </div>
       </div>
-
-      {/* Mood Result Display */}
-      {moodResult && (
-        <div className='mood-result'>
-          <h3>🎵 {moodResult.expression}</h3>
-        </div>
-      )}
-
-      {/* Error Display */}
-      {error && (
-        <div className='mood-result' style={{ borderColor: 'rgba(239, 68, 68, 0.5)' }}>
-          <h3>⚠️ Error</h3>
-          <p>{error}</p>
-          {error.includes('Backend server') && (
-            <div style={{ marginTop: '15px', padding: '10px', background: '#2d3748', borderRadius: '6px', fontSize: '0.9rem' }}>
-              <p style={{ margin: '0 0 10px 0', color: '#cbd5e0' }}><strong>To fix this:</strong></p>
-              <ol style={{ margin: '0', paddingLeft: '20px', color: '#cbd5e0' }}>
-                <li>Open a new terminal</li>
-                <li>Navigate to the BACKEND folder</li>
-                <li>Run: <code style={{ background: '#4a5568', padding: '2px 6px', borderRadius: '4px' }}>npm start</code></li>
-                <li>Make sure MongoDB is running</li>
-              </ol>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Action Button */}
-      <button 
-        className={`mood-button ${isLoading ? 'loading' : ''}`}
-        onClick={detectMood}
-        disabled={!isVideoReady || isLoading}
-      >
-        {isLoading ? 'Detecting...' : 'Detect Mood'}
-      </button>
+      
     </div>
   );
 }

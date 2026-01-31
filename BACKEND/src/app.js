@@ -5,7 +5,6 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
 // Add request size limits for file uploads
 app.use(express.json({limit: '50mb'}));

@@ -1,5 +1,7 @@
 import React from 'react';
 import './MoodDisplay.css';
+import FacialExpression from './FacialExpression';
+import './FacialExpression.css'
 
 const MoodDisplay = ({ isVideoReady, isLoading, moodResult, error }) => {
   const getStatusText = () => {
@@ -17,41 +19,7 @@ const MoodDisplay = ({ isVideoReady, isLoading, moodResult, error }) => {
   };
 
   return (
-    <div className='mood-display'>
-      {/* Status Indicator */}
-      <div className='status-indicator'>
-        <div className={`status-dot ${getStatusClass()}`}></div>
-        <span className='status-text'>{getStatusText()}</span>
-      </div>
-
-      {/* Mood Result Display */}
-      {moodResult && (
-        <div className='mood-result'>
-          <h3>🎵 {moodResult.expression}</h3>
-        </div>
-      )}
-
-      {/* Error Display */}
-      {error && (
-        <div className='mood-result error'>
-          <h3>⚠️ Error</h3>
-          <p>{error}</p>
-        </div>
-      )}
-
-      {/* Instructions */}
-      {!moodResult && !error && (
-        <div className='instructions'>
-          <h3>📋 Instructions</h3>
-          <ol>
-            <li>Position your face in the camera view</li>
-            <li>Make sure your face is clearly visible</li>
-            <li>Click the "Detect Mood" button</li>
-            <li>Wait for the AI to analyze your expression</li>
-          </ol>
-        </div>
-      )}
-    </div>
+    <div></div>
   );
 };
 

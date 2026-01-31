@@ -16,8 +16,8 @@ const App = () => {
     <>
       <div className='main'>
         <div className='app-header'>
-          <h1>Moody Player</h1>
-          <p>Your AI-powered music companion that matches your mood</p>
+          <h1 className='project'> Moody Player </h1>
+          <p className='project-des'>AI that senses your mood and shapes the music around you.</p>
         </div>
         
         <div className='main-content'>
@@ -31,14 +31,14 @@ const App = () => {
             />
           </div>
           
-          <div className='mood-section'>
+          {/* <div className='mood-section'>
             <MoodDisplay 
               isVideoReady={isVideoReady}
               isLoading={isLoading}
               moodResult={moodResult}
               error={error}
             />
-          </div>
+          </div> */}
         </div>
         
         <MoodSongs Songs={Songs} />
