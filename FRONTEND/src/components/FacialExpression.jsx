@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as faceapi from 'face-api.js';
 import './FacialExpression.css'
 import axios from 'axios'
+import { API_URL } from ''
 
 export default function FacialExpression({setSongs}) {
   const videoRef = useRef();
@@ -79,7 +80,7 @@ export default function FacialExpression({setSongs}) {
       });
 
       // Fetch songs based on mood
-      const response = await axios.get(`http://localhost:3000/songs?mood=${_expression}`);
+      const response = await axios.get(`${VITE_API_URL}/songs?mood=${_expression}`);
       setSongs(response.data.songs);
       
     } catch (err) {
