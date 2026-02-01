@@ -79,7 +79,7 @@ export default function FacialExpression({setSongs}) {
       });
 
       // Fetch songs based on mood
-      const response = await axios.get(`${VITE_API_URL}/songs?mood=${_expression}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/songs?mood=${_expression}`);
       setSongs(response.data.songs);
       
     } catch (err) {
